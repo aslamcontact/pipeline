@@ -13,7 +13,7 @@ pipeline
 
                  stage('test') {
                      steps {
-                             sh 'apt install -y git'
+
 
                          withCredentials([usernamePassword(credentialsId: 'docker_hub_access',
                                  usernameVariable: 'USERNAME',
