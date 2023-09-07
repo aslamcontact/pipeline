@@ -15,13 +15,7 @@ cdpipeline
                      steps {
 
                          sh 'mkdir asm'
-                         withCredentials([usernamePassword(credentialsId: 'docker_hub_access',
-                                 usernameVariable: 'USERNAME',
-                                 passwordVariable: 'PASSWORD')]
-                         ) {
 
-                             sh 'docker login --username $USERNAME --password $PASSWORD'
-                         }
 
 
                      }
