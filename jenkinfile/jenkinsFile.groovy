@@ -22,6 +22,7 @@ pipeline
                                         sh 'pwd'
                                         sh 'ls'
                                         sh 'who'
+                                        sh 'cd ../../'
 
 
                                    }
