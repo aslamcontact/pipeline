@@ -30,7 +30,9 @@ pipeline
 
                             steps {
 
+                                sh 'pwd'
                                 sh 'ls'
+                                sh 'who'
 
                             }
                         }
