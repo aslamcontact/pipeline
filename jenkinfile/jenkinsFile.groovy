@@ -12,22 +12,15 @@ cdpipeline
                  stage('test') {
                      steps {
 
-                         sh 'ls'
+                         
 
+                                
 
-
-                     }
-                 }
-
-
-
-
-
+                           }
+                                }
 
 
                  }
-
-
 
 
         }
