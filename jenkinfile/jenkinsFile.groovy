@@ -1,4 +1,4 @@
-cdpipeline
+pipeline
         {
             agent {
                       docker {
