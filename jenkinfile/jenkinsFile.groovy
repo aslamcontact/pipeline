@@ -23,7 +23,7 @@ pipeline
                             steps {
 
                          
-                                    sh 'git --version'
+                                    git --version
                                 
 
                                    }
