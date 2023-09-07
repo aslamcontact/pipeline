@@ -7,7 +7,7 @@ pipeline
                             }
                     }
             tools{
-                git 'git1'
+                maven 'maven'
             }
             options {
                 skipDefaultCheckout()
@@ -26,7 +26,7 @@ pipeline
                             steps {
 
                          
-                                   sh 'git --version'
+                                   sh 'mvn -v'
                                 
 
                                    }
