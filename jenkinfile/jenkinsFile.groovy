@@ -23,7 +23,7 @@ pipeline
                                         sh 'ls'
                                         sh 'who'
                                         sh 'cd ../../'
-
+                                        sh 'ls'
 
                                    }
                          }
