@@ -16,26 +16,19 @@ pipeline
      
             stages{
 
-                 stage('test1') {
-                       when{
-                            expression{con==true}
-                       }
+                 stage('test1')
+                         {
 
-                     steps {
+
+                            steps {
 
                          
-                            sh 'echo $myname'
+                                    sh 'git --version'
                                 
 
-                           }
-                                }
-
-                 stage('test2'){
-                     steps{
-                            sh "echo 'test2'"
+                                   }
                          }
 
-                               }
 
 
                  }
