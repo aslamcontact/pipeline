@@ -14,22 +14,15 @@ cdpipeline
                  stage('test') {
                      steps {
 
-                         sh 'mkdir asm'
+                         sh 'ls'
 
 
 
                      }
                  }
 
-                stage('Front-end') {
-                    agent {
-                        docker { image 'node:18.17.1-alpine3.18' }
-                    }
-                    steps {
-                        sh 'node --version'
-                        sh 'ls'
-                    }
-                }
+
+
 
 
 
