@@ -6,6 +6,9 @@ pipeline
                                 args ' -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
                             }
                     }
+            tools{
+                git 'git1'
+            }
             options {
                 skipDefaultCheckout()
             }
@@ -23,7 +26,7 @@ pipeline
                             steps {
 
                          
-                                    git --version
+                                   sh 'git --version'
                                 
 
                                    }
