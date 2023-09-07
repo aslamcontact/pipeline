@@ -26,7 +26,9 @@ pipeline
                             steps {
 
                          
-                                   mvn -v
+                                   maven {
+                                        sh 'mvn -v'
+                                   }
                                 
 
                                    }
