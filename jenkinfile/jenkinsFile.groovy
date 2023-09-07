@@ -11,11 +11,16 @@ pipeline
             }
             environment{
                          myname='aslam'
+                         con=false
                        }
      
             stages{
 
-                 stage('test') {
+                 stage('test1') {
+                       when{
+                            expression{con==true}
+                       }
+
                      steps {
 
                          
@@ -24,6 +29,13 @@ pipeline
 
                            }
                                 }
+
+                 stage('test2'){
+                     steps{
+                            sh "echo 'test2'"
+                         }
+
+                               }
 
 
                  }
