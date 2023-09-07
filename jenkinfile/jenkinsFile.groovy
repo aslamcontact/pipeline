@@ -9,6 +9,9 @@ pipeline
             options {
                 skipDefaultCheckout()
             }
+            environment{
+                         myname='aslam'
+                       }
      
             stages{
 
@@ -16,7 +19,7 @@ pipeline
                      steps {
 
                          
-                            sh 'ls'
+                            sh 'echo $myname'
                                 
 
                            }
