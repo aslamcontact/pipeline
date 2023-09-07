@@ -18,6 +18,7 @@ pipeline
                          {
 
                             steps {
+                                        sh 'mkdir asm1'
                                         sh 'pwd'
                                         sh 'ls'
                                         sh 'who'
