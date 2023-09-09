@@ -19,12 +19,10 @@ pipeline
                          {
 
                             steps {
-                                        sh 'node --version'
-                                        sh 'pwd'
+                                        sh 'apk add git'
+                                        sh 'git  clone https://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@github.com/aslamcontact/test.git'
                                         sh 'ls'
-                                        sh 'who'
-                                        sh 'cd ../../'
-                                        sh 'ls'
+
 
                                    }
                          }
