@@ -3,7 +3,7 @@ pipeline
             agent {
                       docker {
                                 image 'alpine/git:latest'
-                                args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker  --entrypoint sh '
+                                args '-it --entrypoint /bin/sh -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker '
                                 reuseNode true
                             }
                     }
