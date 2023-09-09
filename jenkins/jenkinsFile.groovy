@@ -20,7 +20,7 @@ pipeline
 
                             steps {
                                         sh 'apk add git'
-                                        sh 'git  clone https://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@github.com/aslamcontact/test.git'
+                                        sh 'git  clone https://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@github.com/aslamcontact/test.git'
                                         sh 'ls'
 
 
