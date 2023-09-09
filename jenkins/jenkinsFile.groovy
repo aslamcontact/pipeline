@@ -19,8 +19,8 @@ pipeline
                          {
 
                             steps {
-                                        sh 'apk add git'
-                                        sh 'git  clone https://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@github.com/aslamcontact/test.git'
+
+                                        sh 'git  --version'
                                         sh 'ls'
 
 
