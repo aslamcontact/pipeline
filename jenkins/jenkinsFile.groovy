@@ -23,8 +23,10 @@ pipeline
 
 
                                         sh 'pwd'
-                                        sh 'docker images'
+                                        sh 'docker run -itd --name test1 alpine'
+                                        sh 'docker ps'
                                         sh "sleep 10"
+                                        sh 'dcoker ps'
 
 
                                    }
