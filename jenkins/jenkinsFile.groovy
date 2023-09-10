@@ -11,14 +11,14 @@ pipeline
                 skipDefaultCheckout()
             }
 
-     
+            environment{
+                volume='artifact'
+            }
             stages{
 
                  stage('cloning')
                          {
-                           environment{
-                               volume='artifact'
-                           }
+
 
 
                              steps {
@@ -34,23 +34,20 @@ pipeline
                          }
                 stage('test2')
                         {
-                            agent {
-                                docker { image 'aslamimages/alpine-git:2'
 
-                                }
-                            }
 
 
                             steps {
 
-                                sh 'pwd'
-                                sh 'git --version'
-                                sh 'ls'
+                                 sh "docker run --rm -v ${volume}:/app -w /app --name sys alpine:latest ls"
 
 
                             }
                         }
 
                  }
+            post{
+                always{sh "docker volume rm ${volume}"}
+            }
 
         }
