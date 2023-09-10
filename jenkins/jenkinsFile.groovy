@@ -53,11 +53,24 @@ pipeline
                 stage('copy')
                         {
                             steps {
-                                sh "docker run --rm -v ${volume}:/app -v /home/buildImage/:/api -w /app/ci_api_test/target --name sys2 ${buildImage} cp ci_test_api-0.0.1-SNAPSHOT.jar /api"
+                                sh "docker run --rm -v ${volume}:/app -v /home/buildImage/:/api -w /app/ci_api_test/target --name sys2 alpine:latest cp ci_test_api-0.0.1-SNAPSHOT.jar /api/product.jar"
+                            }
+                        }
+                stage('build')
+                        {
+                            environment{
+                                          buildCmd="docker build -t jdk_test:${BUILD_NUMBER} ."
+                                       }
+                            steps {
+                                sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker -v /home/buildImage/:/api -w /api --name sys3 ubuntu:latest ${buildCmd}"
                             }
                         }
 
-        }
+
+
+
+
+            }
 
             post{
 
