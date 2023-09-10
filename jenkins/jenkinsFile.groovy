@@ -5,6 +5,7 @@ pipeline
                     image 'ubuntu:latest'
                     args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
                     args '-v /home/buildImage/:/buildImage'
+
                 }
             }
 
@@ -54,7 +55,7 @@ pipeline
                 stage('copy')
                         {
                             steps {
-                                sh "docker run --rm -v ${volume}:/app  -w /app/ci_api_test/target --name sys2 alpine:latest cp ci_test_api-0.0.1-SNAPSHOT.jar /buildImage/product.jar"
+                                sh "docker run --rm -v ${volume}:/app -v /home/buildImage/:/buildImage -w /app/ci_api_test/target --name sys2 alpine:latest cp ci_test_api-0.0.1-SNAPSHOT.jar /buildImage/product.jar"
                             }
                         }
                 stage('build')
