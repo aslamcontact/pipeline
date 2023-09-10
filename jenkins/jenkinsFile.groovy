@@ -42,7 +42,7 @@ pipeline
 
                             steps {
 
-                                 sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
+                                 sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn clean"
 
 
                             }
