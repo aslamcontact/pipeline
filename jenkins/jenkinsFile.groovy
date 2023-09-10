@@ -13,7 +13,7 @@ pipeline
                          {
                              agent {
                                  docker {
-                                     image 'aslamimages/mvn_jdk_git:latest'
+                                     image 'aslamimages/ubuntu:latest'
                                      args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
                                  }
                              }
@@ -23,7 +23,7 @@ pipeline
 
 
                                         sh 'pwd'
-                                        sh 'mvn --version'
+                                        sh 'docker images'
                                         sh "sleep 10"
 
 
