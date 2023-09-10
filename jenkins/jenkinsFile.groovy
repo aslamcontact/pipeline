@@ -4,7 +4,7 @@ pipeline
                       docker {
                                 image 'aslamimages/mvn_jdk_git:latest'
                                 args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
-                                reuseNode true
+
                             }
                     }
 
