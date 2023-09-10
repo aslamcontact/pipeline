@@ -18,7 +18,7 @@ pipeline
                          {
                              agent {
                                  docker { image 'aslamimages/alpine-git:2'
-                                     args '-v ${pwd}/git -w /git'
+                                     args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker\' -v ${pwd}/git -w /git'
                                  }
                              }
 
@@ -35,7 +35,7 @@ pipeline
                         {
                             agent {
                                 docker { image 'aslamimages/alpine-git:2'
-                                    args '-v ${pwd}/git -w /git'
+                                    args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker\' -v ${pwd}/git -w /git'
                                 }
                             }
 
