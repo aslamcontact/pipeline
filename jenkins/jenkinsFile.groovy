@@ -64,8 +64,9 @@ pipeline
                                           buildCmd="docker build -t jdk_test:${BUILD_NUMBER} ."
                                        }
                             steps {
-                                sh 'cd /buildImage'
-                                sh "${buildCmd}"
+                                sh 'ls'
+                                sh "docker build -t jdk_test:${BUILD_NUMBER} /buildImage"
+
                             }
                         }
 
