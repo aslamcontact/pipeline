@@ -2,8 +2,8 @@ pipeline
         {
             agent {
                       docker {
-                                image 'alpine/git:latest'
-                                args '-it --entrypoint /bin/sh -v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker '
+                                image 'aslamimages/alpine-git'
+                                args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker '
                                 reuseNode true
                             }
                     }
@@ -32,8 +32,7 @@ pipeline
                             steps {
 
                                 sh 'pwd'
-                                sh 'ls'
-                                sh 'who'
+
 
                             }
                         }
