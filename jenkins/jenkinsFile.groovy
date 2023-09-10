@@ -1,6 +1,11 @@
 pipeline
         {
-            agent none
+            agent {
+                docker {
+                    image 'ubuntu:latest'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
+                }
+            }
 
             options {
                 skipDefaultCheckout()
@@ -11,20 +16,15 @@ pipeline
 
                  stage('test1')
                          {
-                             agent {
-                                 docker {
-                                     image 'ubuntu:latest'
-                                     args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
-                                 }
-                             }
+
 
 
                              steps {
 
 
                                         sh 'pwd'
-                                        sh 'docker run -itd --name test1 alpine'
-                                        sh 'docker ps'
+                                        sh 'docker run --rm -it --name test1 aslamimages/alpine-git:2'
+                                        sh 'git --version'
                                         sh "sleep 10"
 
 
