@@ -13,6 +13,9 @@ pipeline
 
             environment{
                 volume='artifact'
+                gitImage='aslamimages/alpine-git:2'
+                buildImage="aslamimages/aslamimages/mvn_jdk_git:latest"
+                gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
             }
             stages{
 
@@ -25,7 +28,7 @@ pipeline
 
 
                                         sh "docker volume create ${volume}"
-                                        sh "docker run --rm -v ${volume}:/app -w /app  --name test2 aslamimages/alpine-git:2 git clone https://github.com/aslamcontact/ci_api_test.git"
+                                        sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
                                         sh ''
 
 
@@ -39,7 +42,7 @@ pipeline
 
                             steps {
 
-                                 sh "docker run --rm -v ${volume}:/app -w /app --name sys alpine:latest ls"
+                                 sh "docker run --rm -v ${volume}:/app -w /app --name sys ${buildImage} ls"
 
 
                             }
