@@ -56,7 +56,7 @@ pipeline
                                 sh "docker run --rm -v ${volume}:/app -v /home/buildImage/:/api -w /app/ci_api_test/target --name sys2 ${buildImage} cp ci_test_api-0.0.1-SNAPSHOT.jar /api"
                             }
                         }
-            }
+
         }
 
             post{
