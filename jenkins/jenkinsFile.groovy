@@ -24,7 +24,7 @@ pipeline
                             steps {
                                 sh "docker volume create ${volume}"
                                 sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
-                                sh 'apt install git'
+
                             }
                         }
 
