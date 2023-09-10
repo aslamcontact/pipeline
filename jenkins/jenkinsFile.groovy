@@ -14,17 +14,19 @@ pipeline
      
             stages{
 
-                 stage('test1')
+                 stage('cloning')
                          {
-
+                           environment{
+                               volume='artifact'
+                           }
 
 
                              steps {
 
 
-                                        sh 'pwd'
-                                        sh 'docker run --rm  --name test2 aslamimages/alpine-git:2 git clone https://github.com/aslamcontact/ci_api_test.git'
-                                        sh 'ls'
+                                        sh "docker volume create ${volume}"
+                                        sh "docker run --rm -v ${volume}:/app -w /app  --name test2 aslamimages/alpine-git:2 git clone https://github.com/aslamcontact/ci_api_test.git"
+                                        sh ''
 
 
 
