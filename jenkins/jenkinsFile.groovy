@@ -24,7 +24,7 @@ pipeline
 
                                         sh 'pwd'
                                         sh 'mvn --version'
-                                        sh 'docker images'
+                                        sh "sleep 10"
 
 
                                    }
@@ -42,7 +42,7 @@ pipeline
 
                                 sh 'pwd'
                                 sh 'git --version'
-                                sh 'docker images'
+                                sh 'sleep 10'
 
 
                             }
