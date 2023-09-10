@@ -23,7 +23,7 @@ pipeline
 
 
                                         sh 'pwd'
-                                        sh 'docker run --rm  --name test2 aslamimages/alpine-git:2 git --version'
+                                        sh 'docker run --rm  --name test2 aslamimages/alpine-git:2 git clone https://github.com/aslamcontact/ci_api_test.git'
 
                                         sh "sleep 10"
 
