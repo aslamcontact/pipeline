@@ -23,7 +23,7 @@ pipeline
 
 
                                         sh 'pwd'
-                                        sh 'docker run --rm -it --name test1 aslamimages/alpine-git:2'
+                                        sh 'docker run --rm -it --name test1 aslamimages/alpine-git:2 sh'
                                         sh 'git --version'
                                         sh "sleep 10"
 
