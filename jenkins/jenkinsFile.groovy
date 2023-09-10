@@ -35,14 +35,14 @@ pipeline
 
                                    }
                          }
-                stage('test2')
+                stage('validate')
                         {
 
 
 
                             steps {
 
-                                 sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn clean"
+                                 sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
 
 
                             }
