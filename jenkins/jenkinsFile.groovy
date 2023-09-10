@@ -24,6 +24,7 @@ pipeline
 
                                         sh 'pwd'
                                         sh 'mvn --version'
+                                        sh 'docker images'
 
 
                                    }
@@ -41,6 +42,7 @@ pipeline
 
                                 sh 'pwd'
                                 sh 'git --version'
+                                sh 'docker images'
 
 
                             }
