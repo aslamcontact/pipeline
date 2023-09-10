@@ -61,7 +61,7 @@ pipeline
                 stage('build')
                         {
                             environment{
-                                          oldBuild=${BUILD_NUMBER}-1
+                                          oldBuild="${BUILD_NUMBER}-1"
                                        }
                             steps {
 
