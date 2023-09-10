@@ -60,13 +60,11 @@ pipeline
                         }
                 stage('build')
                         {
-                            environment{
-                                          oldBuild="${BUILD_NUMBER}-1"
-                                       }
+
                             steps {
 
                                 sh "docker build -t jdk_test:${BUILD_NUMBER} /buildImage"
-                                sh "docker image rm jdk_test:${oldBuild}"
+
                                 sh "docker tag jdk_test:${BUILD_NUMBER} jdk_test:latest"
                             }
                         }
