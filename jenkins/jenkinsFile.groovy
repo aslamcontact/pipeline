@@ -17,41 +17,52 @@ pipeline
                 buildImage="aslamimages/mvn_jdk_git:latest"
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
             }
-            stages{
+            stages {
 
-                 stage('cloning')
-                         {
-                             steps {
-                                        sh "docker volume create ${volume}"
-                                        sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
-                                        sh ''
-                                   }
-                         }
+                stage('cloning')
+                        {
+                            steps {
+                                sh "docker volume create ${volume}"
+                                sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
+                                sh 'apt install git'
+                            }
+                        }
 
                 stage('validate')
                         {
                             steps {
-                                        sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
-                                  }
+                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
+                            }
                         }
                 stage('compile')
                         {
                             steps {
-                                       sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn compile"
+                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn compile"
 
-                                  }
+                            }
                         }
 
 
                 stage('package')
                         {
                             steps {
-                                     sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
-                                  }
+                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
+                            }
                         }
-                 }
-            post{
-                always{sh "docker volume rm ${volume}"}
+
+                stage('copy')
+                        {
+                            steps {
+                                sh "docker run --rm -v ${volume}:/app -v /home/buildImage/:/api -w /app/ci_api_test/target --name sys2 ${buildImage} cp ci_test_api-0.0.1-SNAPSHOT.jar /api"
+                            }
+                        }
             }
+        }
+
+            post{
+
+                always{sh "docker volume rm ${volume}"}
+
+                }
 
         }
