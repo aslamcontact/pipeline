@@ -23,7 +23,7 @@ pipeline
 
 
                                         sh 'pwd'
-                                        sh 'ls'
+                                        sh 'mvn --version'
 
 
                                    }
