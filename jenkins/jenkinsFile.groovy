@@ -14,7 +14,7 @@ pipeline
             environment{
                 volume='artifact'
                 gitImage='aslamimages/alpine-git:2'
-                buildImage="aslamimages/aslamimages/mvn_jdk_git:latest"
+                buildImage="aslamimages/mvn_jdk_git:latest"
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
             }
             stages{
