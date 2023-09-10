@@ -21,54 +21,34 @@ pipeline
 
                  stage('cloning')
                          {
-
-
-
                              steps {
-
-
                                         sh "docker volume create ${volume}"
                                         sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
                                         sh ''
-
-
-
                                    }
                          }
 
                 stage('validate')
                         {
-
                             steps {
-
-                                 sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
-
-
-                            }
+                                        sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
+                                  }
                         }
                 stage('compile')
                         {
-
                             steps {
+                                       sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn compile"
 
-                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn compile"
-
-
-                            }
+                                  }
                         }
 
 
-                stage('validate')
+                stage('package')
                         {
-
                             steps {
-
-                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
-
-
-                            }
+                                     sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
+                                  }
                         }
-
                  }
             post{
                 always{sh "docker volume rm ${volume}"}
