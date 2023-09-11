@@ -59,7 +59,7 @@ pipeline
                                         "-v /home/buildImage/:/buildImage"+
                                         " -w /app/ci_api_test/target "+
                                         "--name sys2 alpine:latest "+
-                                        "cp *SNAPSHOT.jar /buildImage/product.jar"
+                                        "cp '*.jar' /buildImage/product.jar"
                             }
                         }
                 stage('build')
