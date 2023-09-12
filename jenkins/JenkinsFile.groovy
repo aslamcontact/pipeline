@@ -77,12 +77,14 @@ pipeline
                                         "docker build -t aslamimages/basic_api:${BUILD_NUMBER} ci_api_test/."
                             }
                         }
-                stage('show')
+                stage('deploy')
                         {
 
                             steps {
 
-                                sh "docker images"
+                                sh "docker tag aslamimages/basic_api:${BUILD_NUMBER} aslamimages/basic_api:latest"
+                                sh "docker push aslamimages/basic_api:${BUILD_NUMBER}"
+                                sh "docker push aslamimages/basic_api:latest"
 
 
                             }
@@ -96,7 +98,10 @@ pipeline
 
             post{
 
-                always{sh "docker volume rm ${volume}"}
+                always{
+                    sh "docker volume rm ${volume}"
+                    sh "docker images"
+                }
 
                 }
 
