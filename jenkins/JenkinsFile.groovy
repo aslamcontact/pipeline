@@ -4,11 +4,11 @@ pipeline
             agent {
                 docker {
                     image 'ubuntu:latest'
-                    args    ' -v /var/run/docker.sock:/var/run/docker.sock "+' +
+                    args ' -v /var/run/docker.sock:/var/run/docker.sock ' +
                             ' -v /usr/bin/docker:/usr/bin/docker'
-
+                       }
                 }
-            }
+
 
             options {
                 skipDefaultCheckout()
@@ -95,7 +95,7 @@ pipeline
 
             post{
 
-                always{sh "docker volume ls"}
+                always{sh "docker volume rm ${volume}"}
 
                 }
 
