@@ -19,6 +19,7 @@ pipeline
                 gitImage='aslamimages/alpine-git:2'
                 buildImage="aslamimages/mvn_jdk_git:latest"
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
+                vsort="docker images | grep jdk_test |grep -v latest|sort -r -n"
             }
             stages {
 
@@ -81,7 +82,7 @@ pipeline
 
                             steps {
 
-                                sh "docker images | grep jdk"
+                                sh "echo ${vsort}"
 
 
                             }
