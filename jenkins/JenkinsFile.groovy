@@ -1,10 +1,11 @@
-def gv
+
 pipeline
         {
             agent {
                 docker {
                     image 'ubuntu:latest'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock  -v /usr/bin/docker:/usr/bin/docker'
+                    args    ' -v /var/run/docker.sock:/var/run/docker.sock "+' +
+                            ' -v /usr/bin/docker:/usr/bin/docker'
                     args '-v /home/buildImage/:/buildImage'
 
                 }
@@ -21,39 +22,35 @@ pipeline
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
             }
             stages {
-                 stage('load script') {
-                     steps {
-                         script {
-                             gv = load scriptGv.groovy
-                         }
-                     }
-                 }
-
-                stage('test'){
-                           steps{
-                                     script{ gv.test() }
-                                 }
-                                     }
 
                 stage('cloning')
                         {
                             steps {
-                                sh "docker volume create ${volume}"
-                                sh "docker run --rm -v ${volume}:/app -w /app  --name test2 ${gitImage} git clone ${gitProjectUrl}"
+                                  sh  "docker volume create ${volume}"
 
-                            }
+                                  sh  "docker run --rm  --name test2 "+
+                                          "-v ${volume}:/app "+
+                                          "-w /app  ${gitImage} "+
+                                          "git clone ${gitProjectUrl}"
+                                   }
                         }
 
                 stage('validate')
                         {
                             steps {
-                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn validate"
+                                sh "docker run --rm --name sys "+
+                                        "-v ${volume}:/app "+
+                                        " -w /app/ci_api_test ${buildImage} "+
+                                        "mvn validate"
                             }
                         }
                 stage('compile')
                         {
                             steps {
-                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn compile"
+                                sh "docker run --rm  --name sys "+
+                                        "-v ${volume}:/app "+
+                                        "-w /app/ci_api_test ${buildImage} " +
+                                        "mvn compile"
 
                             }
                         }
@@ -62,7 +59,10 @@ pipeline
                 stage('package')
                         {
                             steps {
-                                sh "docker run --rm -v ${volume}:/app -w /app/ci_api_test --name sys ${buildImage} mvn package"
+                                sh "docker run --rm --name sys "+
+                                        "-v ${volume}:/app "+
+                                        "-w /app/ci_api_test  ${buildImage}"+
+                                        " mvn package"
                             }
                         }
 
