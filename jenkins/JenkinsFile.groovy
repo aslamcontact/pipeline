@@ -29,7 +29,7 @@ pipeline
                      }
                  }
 
-                stage('load script'){
+                stage('test'){
                            steps{
                                      script{ gv.test() }
                                  }
