@@ -82,7 +82,7 @@ pipeline
 
                             steps {
 
-                                withCredentials([usernamePassword(credentialsId: 'docker_hub_key',
+                                withCredentials([usernamePassword(credentialsId: 'dockerhub_key',
                                         usernameVariable: 'USERNAME',
                                         passwordVariable: 'PASSWORD')]
                                 ) {
