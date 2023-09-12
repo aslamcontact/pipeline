@@ -21,17 +21,20 @@ pipeline
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
             }
             stages {
-                 stage('load script'){
-                     steps{
-                         script{
-                                  gv=load stages.groovy}
-                                }
-                                  }
+                 stage('load script') {
+                     steps {
+                         script {
+                             gv = load stages.groovy
+                         }
+                     }
+                 }
 
-                stage('load script'){steps{
-                                      script{ gv.test()}
-                                       }
+                stage('load script'){
+                           steps{
+                                     script{ gv.test() }
+                                 }
                                      }
+
                 stage('cloning')
                         {
                             steps {
