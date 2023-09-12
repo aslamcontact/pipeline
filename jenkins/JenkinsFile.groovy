@@ -95,7 +95,7 @@ pipeline
 
             post{
 
-                always{sh "docker volume rm ${volume}"}
+                always{sh "docker volume ls"}
 
                 }
 
