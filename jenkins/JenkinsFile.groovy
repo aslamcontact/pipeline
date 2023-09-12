@@ -6,7 +6,6 @@ pipeline
                     image 'ubuntu:latest'
                     args    ' -v /var/run/docker.sock:/var/run/docker.sock "+' +
                             ' -v /usr/bin/docker:/usr/bin/docker'
-                    args '-v /home/buildImage/:/buildImage'
 
                 }
             }
@@ -40,8 +39,8 @@ pipeline
                             steps {
                                 sh "docker run --rm --name sys "+
                                         "-v ${volume}:/app "+
-                                        " -w /app/ci_api_test ${buildImage} "+
-                                        "mvn validate"
+                                        " -w /app ${buildImage} "+
+                                        "ci_api_test/mvn validate"
                             }
                         }
                 stage('compile')
@@ -49,8 +48,8 @@ pipeline
                             steps {
                                 sh "docker run --rm  --name sys "+
                                         "-v ${volume}:/app "+
-                                        "-w /app/ci_api_test ${buildImage} " +
-                                        "mvn compile"
+                                        "-w /app ${buildImage} " +
+                                        "ci_api_test/mvn compile"
 
                             }
                         }
@@ -59,31 +58,32 @@ pipeline
                 stage('package')
                         {
                             steps {
-                                sh "docker run --rm --name sys "+
+                                sh "docker run --rm  --name sys "+
                                         "-v ${volume}:/app "+
-                                        "-w /app/ci_api_test  ${buildImage}"+
-                                        " mvn package"
+                                        "-w /app ${buildImage} " +
+                                        "ci_api_test/mvn package"
                             }
                         }
 
-                stage('copy')
-                        {
-                            steps {
-                                sh "docker run --rm -v ${volume}:/app "+
-                                        "-v /home/buildImage/:/buildImage"+
-                                        " -w /app/ci_api_test/target "+
-                                        "--name sys2 alpine:latest "+
-                                        "cp ci_test_api-0.0.1-SNAPSHOT.jar /buildImage/product.jar"
-                            }
-                        }
                 stage('build')
                         {
+                            steps {
+                                sh "docker run --rm --name sys2 "+
+                                        " -v ${volume}:/app "+
+                                        " -v /var/run/docker.sock:/var/run/docker.sock "+
+                                        " -v /usr/bin/docker:/usr/bin/docker "
+                                        " -w /app  ubuntu:latest "+
+                                        "docker build -t jdk_test:${BUILD_NUMBER} ci_api_test/."
+                            }
+                        }
+                stage('show')
+                        {
 
                             steps {
 
-                                sh "docker build -t jdk_test:${BUILD_NUMBER} /buildImage"
+                                sh "docker images | grep jdk"
 
-                                sh "docker tag jdk_test:${BUILD_NUMBER} jdk_test:latest"
+
                             }
                         }
 
