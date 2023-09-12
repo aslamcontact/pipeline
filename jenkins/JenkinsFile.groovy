@@ -19,8 +19,8 @@ pipeline
                 gitImage='aslamimages/alpine-git:2'
                 buildImage="aslamimages/mvn_jdk_git:latest"
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
-                vsort="docker images | grep jdk_test |grep -v latest|sort -r -n"
-            }
+
+                      }
             stages {
 
                 stage('cloning')
@@ -74,7 +74,7 @@ pipeline
                                         " -v /var/run/docker.sock:/var/run/docker.sock "+
                                         " -v /usr/bin/docker:/usr/bin/docker "+
                                         " -w /app  ubuntu:latest "+
-                                        "docker build -t jdk_test:${BUILD_NUMBER} ci_api_test/."
+                                        "docker build -t aslamimages/jdk_test:${BUILD_NUMBER} ci_api_test/."
                             }
                         }
                 stage('show')
@@ -82,7 +82,7 @@ pipeline
 
                             steps {
 
-                                sh "echo ${vsort}"
+                                sh "docker images"
 
 
                             }
