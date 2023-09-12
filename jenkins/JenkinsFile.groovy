@@ -40,7 +40,7 @@ pipeline
                                 sh "docker run --rm --name sys "+
                                         "-v ${volume}:/app "+
                                         " -w /app ${buildImage} "+
-                                        "ci_api_test/mvn validate"
+                                        "mvn -f ci_api_test/ validate"
                             }
                         }
                 stage('compile')
@@ -49,7 +49,7 @@ pipeline
                                 sh "docker run --rm  --name sys "+
                                         "-v ${volume}:/app "+
                                         "-w /app ${buildImage} " +
-                                        "ci_api_test/mvn compile"
+                                        "mvn -f ci_api_test/ compile"
 
                             }
                         }
@@ -61,7 +61,7 @@ pipeline
                                 sh "docker run --rm  --name sys "+
                                         "-v ${volume}:/app "+
                                         "-w /app ${buildImage} " +
-                                        "ci_api_test/mvn package"
+                                        "mvn -f ci_api_test/ package"
                             }
                         }
 
