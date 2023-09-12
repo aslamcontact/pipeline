@@ -82,9 +82,18 @@ pipeline
 
                             steps {
 
-                                sh "docker tag aslamimages/basic_api:${BUILD_NUMBER} aslamimages/basic_api:latest"
-                                sh "docker push aslamimages/basic_api:${BUILD_NUMBER}"
-                                sh "docker push aslamimages/basic_api:latest"
+                                withCredentials([usernamePassword(credentialsId: 'docker_hub_access',
+                                        usernameVariable: 'USERNAME',
+                                        passwordVariable: 'PASSWORD')]
+                                ) {
+
+                                    sh 'docker login --username $USERNAME --password $PASSWORD'
+                                    sh "docker tag aslamimages/basic_api:${BUILD_NUMBER} aslamimages/basic_api:latest"
+                                    sh "docker push aslamimages/basic_api:${BUILD_NUMBER}"
+                                    sh "docker push aslamimages/basic_api:latest"
+
+                                }
+
 
 
                             }
