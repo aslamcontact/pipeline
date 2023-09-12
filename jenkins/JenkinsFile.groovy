@@ -111,6 +111,11 @@ pipeline
                     sh "docker volume rm ${volume}"
                     sh "docker images"
                 }
+                success{
+                     sh " docker images | awk '{print \$1 \" \" \$2 \" \" \$3}' "+
+                             "| grep aslamimages/basic_api | grep -v latest "+
+                             "| grep -v 'api ${BUILD_NUMBER}' | awk '{print \$3}'"
+                }
 
                 }
 
