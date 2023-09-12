@@ -74,7 +74,7 @@ pipeline
                                         " -v /var/run/docker.sock:/var/run/docker.sock "+
                                         " -v /usr/bin/docker:/usr/bin/docker "+
                                         " -w /app  ubuntu:latest "+
-                                        "docker build -t aslamimages/jdk_test:${BUILD_NUMBER} ci_api_test/."
+                                        "docker build -t aslamimages/basic_api:${BUILD_NUMBER} ci_api_test/."
                             }
                         }
                 stage('show')
