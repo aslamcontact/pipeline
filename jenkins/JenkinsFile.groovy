@@ -19,6 +19,7 @@ pipeline
                 gitImage='aslamimages/alpine-git:2'
                 buildImage="aslamimages/mvn_jdk_git:latest"
                 gitProjectUrl="https://github.com/aslamcontact/ci_api_test.git"
+                deployImage="aslamimages/basic_api"
 
                       }
             stages {
@@ -74,7 +75,7 @@ pipeline
                                         " -v /var/run/docker.sock:/var/run/docker.sock "+
                                         " -v /usr/bin/docker:/usr/bin/docker "+
                                         " -w /app  ubuntu:latest "+
-                                        "docker build -t aslamimages/basic_api:${BUILD_NUMBER} ci_api_test/."
+                                        "docker build -t ${deployImage}:${BUILD_NUMBER} ci_api_test/."
                             }
                         }
                 stage('deploy')
@@ -88,9 +89,9 @@ pipeline
                                 ) {
 
                                     sh 'docker login --username $USERNAME --password $PASSWORD'
-                                    sh "docker tag aslamimages/basic_api:${BUILD_NUMBER} aslamimages/basic_api:latest"
-                                    sh "docker push aslamimages/basic_api:${BUILD_NUMBER}"
-                                    sh "docker push aslamimages/basic_api:latest"
+                                    sh "docker tag ${deployImage}:${BUILD_NUMBER} ${deployImage}:latest"
+                                    sh "docker push ${deployImage}:${BUILD_NUMBER}"
+                                    sh "docker push ${deployImage}:latest"
 
                                 }
 
@@ -114,7 +115,7 @@ pipeline
                 success{
                      sh " docker image rm "+
                          "\$(docker images | awk '{print \$1 \" \" \$2 \" \" \$3}' "+
-                             "| grep aslamimages/basic_api | grep -v latest "+
+                             "| grep ${deployImage} | grep -v latest "+
                              "| grep -v 'api ${BUILD_NUMBER}' | awk '{print \$3}')"
                 }
 
