@@ -116,7 +116,7 @@ pipeline
                      sh " docker image rm "+
                          "\$(docker images | awk '{print \$1 \" \" \$2 \" \" \$3}' "+
                              "| grep ${deployImage} | grep -v latest "+
-                             "| grep -v 'api ${BUILD_NUMBER}' | awk '{print \$3}')"
+                             "| grep -v '${deployImage} ${BUILD_NUMBER}' | awk '{print \$3}')"
                 }
 
                 }
