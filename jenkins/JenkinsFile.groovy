@@ -88,6 +88,8 @@ pipeline
                                         passwordVariable: 'PASSWORD')]
                                 ) {
 
+                                    sh 'docker compose /home/basic_api/down'
+
                                     sh 'docker login --username $USERNAME --password $PASSWORD'
                                     sh "docker tag ${deployImage}:${BUILD_NUMBER} ${deployImage}:latest"
                                     sh "docker push ${deployImage}:${BUILD_NUMBER}"
@@ -110,7 +112,7 @@ pipeline
 
                 always{
                     sh "docker volume rm ${volume}"
-                    sh "docker images"
+                    sh 'docker compose /home/basic_api/up -d'
                 }
                 success{
                      sh " docker image rm "+
