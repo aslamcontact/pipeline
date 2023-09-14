@@ -88,7 +88,7 @@ pipeline
                                         passwordVariable: 'PASSWORD')]
                                 ) {
 
-                                    sh 'docker compose /compose/docker-compose.yml down'
+                                    sh 'docker compose -f /compose/docker-compose.yml down'
 
                                     sh 'docker login --username $USERNAME --password $PASSWORD'
                                     sh "docker tag ${deployImage}:${BUILD_NUMBER} ${deployImage}:latest"
@@ -112,7 +112,7 @@ pipeline
 
                 always{
                     sh "docker volume rm ${volume}"
-                    sh 'docker compose /compose/docker-compose.yml up -d'
+                    sh 'docker compose -f /compose/docker-compose.yml up -d'
                 }
                 success{
                      sh " docker image rm "+
