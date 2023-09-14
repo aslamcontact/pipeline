@@ -5,7 +5,7 @@ pipeline
                 docker {
                     image 'ubuntu:latest'
                     args ' -v /var/run/docker.sock:/var/run/docker.sock ' +
-                            ' -v /usr/bin/docker:/usr/bin/docker -v /home/basic_api:/compose'
+                            ' -v /usr/bin/docker:/usr/bin/docker '
                        }
                 }
 
@@ -88,7 +88,7 @@ pipeline
                                         passwordVariable: 'PASSWORD')]
                                 ) {
 
-                                    sh 'docker compose -f /compose/docker-compose.yml down'
+
 
                                     sh 'docker login --username $USERNAME --password $PASSWORD'
                                     sh "docker tag ${deployImage}:${BUILD_NUMBER} ${deployImage}:latest"
@@ -112,7 +112,7 @@ pipeline
 
                 always{
                     sh "docker volume rm ${volume}"
-                    sh 'docker compose -f /compose/docker-compose.yml up -d'
+
                 }
                 success{
                      sh " docker image rm "+
